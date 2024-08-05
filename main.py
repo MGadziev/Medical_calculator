@@ -1,3 +1,5 @@
+import os
+
 import calc_before_operation
 import calc_during_operation
 import conversation
@@ -11,7 +13,7 @@ from aiogram import Bot, Dispatcher, F
 from aiogram.filters import Command
 from buttons import FAQ_Callback
 
-USER_TOKEN = '7174889644:AAE7uCtWLqle8mHgNfpHTotfj9GEwPw1jlQ'
+USER_TOKEN = os.environ.get('TOKEN')
 
 async def start():
     bot = Bot(token=USER_TOKEN)

@@ -1,4 +1,4 @@
-import datetime
+import datetime, os
 
 from sqlalchemy import create_engine, Column, String, DateTime, Boolean, Integer
 from sqlalchemy.orm import sessionmaker
@@ -132,7 +132,7 @@ async def update_patient_by_id(patient_id, new_status=None, holicestit_organizat
         return None
 
 # Создаем соединение с базой данных
-engine = create_engine(f"postgresql://postgres:gt-I9100@localhost/medical_calc")
+engine = create_engine(f"{os.environ.get('DB_SERVER')}")
 Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 session = Session()
