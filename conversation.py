@@ -47,4 +47,3 @@ async def get_support(message: Message,  state: FSMContext):
     await state.clear()
     await message.answer(message_texts.tech_support_text, reply_markup=tech_support_buttons)
     return None
-

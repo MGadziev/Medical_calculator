@@ -8,7 +8,9 @@ import asyncio
 import create_patient, get_patients_
 import faq
 import holecystit
-from states import UserInfo, HolecystitOperation, CreatePatient, ShowPatient, BeforeOperationFlow, DuringOperationFlow
+import patient_note
+from states import UserInfo, HolecystitOperation, CreatePatient, \
+    ShowPatient, BeforeOperationFlow, DuringOperationFlow, PatientNote
 from aiogram import Bot, Dispatcher, F
 from aiogram.filters import Command
 from buttons import FAQ_Callback
@@ -32,6 +34,7 @@ async def start():
     dp.message.register(get_patients_.get_patients, F.text == '👨‍👨‍👦 Все пациенты')
     dp.message.register(calc_before_operation.get_patients_bo, F.text == '⬆️ Предоперационный калькулятор')
     dp.message.register(calc_during_operation.get_patients_do, F.text == '⬇️ Интраоперационный калькулятор')
+    dp.message.register(patient_note.get_patients_for_note, F.text == 'Оставить комментарий по пациенту')
 
 
     # Создание пациента
@@ -81,6 +84,10 @@ async def start():
     # Регистрация врача
     dp.message.register(conversation.get_name, UserInfo.GET_NAME)
     dp.message.register(conversation.get_clinic, UserInfo.GET_CLINIC)
+
+    # Комментарий по пациенту/
+    dp.message.register(patient_note.add_patient_note, PatientNote.ADD_NOTE)
+    dp.message.register(patient_note.save_patient_note, PatientNote.SAVE_NOTE)
 
     try:
         await dp.start_polling(bot)

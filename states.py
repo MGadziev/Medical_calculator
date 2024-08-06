@@ -38,3 +38,7 @@ class DuringOperationFlow(StatesGroup):
     STEP_3 = State()
     STEP_4 = State()
     SCHEMAS = State()
+
+class PatientNote(StatesGroup):
+    ADD_NOTE = State()
+    SAVE_NOTE = State()

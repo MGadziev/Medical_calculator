@@ -58,6 +58,7 @@ class Patient(Base):
     infiltrat = Column(Boolean, default=False)
     doctor_id = Column(String)
     total_score = Column(Integer, default=0)
+    comment = Column(String)
 
 async def create_patient(name, card_number, doctor_id):
     try:
@@ -97,7 +98,7 @@ async def get_patients_info_by_id(id):
 
 async def update_patient_by_id(patient_id, new_status=None, holicestit_organization_level=None, age_more_than_55=None
                                , imt_more_than_30=None, stoma_operations=None, jaundice=None, adhesion=None,
-                               omentum=None, fibrose_changes=None, infiltrat=None, total_score=None):
+                               omentum=None, fibrose_changes=None, infiltrat=None, total_score=None, comment=None):
     try:
         patient = session.query(Patient).filter_by(id=patient_id).first()
         if patient:
@@ -123,6 +124,8 @@ async def update_patient_by_id(patient_id, new_status=None, holicestit_organizat
                 patient.infiltrat = infiltrat
             if total_score:
                 patient.total_score = total_score
+            if comment:
+                patient.comment = comment
             session.commit()
         return None
     except Exception as e:

@@ -20,6 +20,9 @@ initial_keyboard = [
     [
         KeyboardButton(text='🔨 Техническая поддержка', url='t.me/mgadziev')
         , KeyboardButton(text='❓FAQ')
+    ],
+    [
+        KeyboardButton(text='Оставить комментарий по пациенту')
     ]
 ]
 initial_keyboard_markup = ReplyKeyboardMarkup(keyboard=initial_keyboard, resize_keyboard=True)
