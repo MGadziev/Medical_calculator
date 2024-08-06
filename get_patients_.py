@@ -34,6 +34,7 @@ async def show_patient_info(message: Message,  state: FSMContext):
                          f'5. Есть ли спаченый процесс в верхнем этаже брюшной полости? {patient.adhesion}\n'
                          f'6. Есть ли окутаность желчного пузыря фиксированной прядью большого сальника? {patient.omentum}\n'
                          f'7. Есть ли фиброзные изменения желчного пузыря? {patient.fibrose_changes}\n'
-                         f'8. Есть ли у пациента околопузырный инфильтрат? {patient.infiltrat}', reply_markup=ReplyKeyboardRemove())
+                         f'8. Есть ли у пациента околопузырный инфильтрат? {patient.infiltrat}\n'
+                         f'Комментарий: {patient.comment}\n', reply_markup=ReplyKeyboardRemove())
     await state.clear()
     return None
