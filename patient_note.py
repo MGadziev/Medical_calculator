@@ -1,3 +1,4 @@
+import buttons
 from db_act import get_patients_info
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
 from aiogram.types import Message, KeyboardButton, ReplyKeyboardRemove
@@ -18,7 +19,7 @@ async def get_patients_for_note(message: Message,  state: FSMContext):
         await message.answer("Выберите пациента:", reply_markup=builder.as_markup(resize_keyboard=True), )
         await state.set_state(PatientNote.ADD_NOTE)
     else:
-        await message.answer("У вас нет пациентов", reply_markup=builder.as_markup(resize_keyboard=True), )
+        await message.answer("У вас нет пациентов", reply_markup=buttons.initial_keyboard_markup )
     return None
 
 
