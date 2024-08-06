@@ -18,7 +18,7 @@ async def get_patients_bo(message: Message,  state: FSMContext):
         await state.set_state(BeforeOperationFlow.SHOW_PATIENT)
         return None
     else:
-        await message.answer("Нет новых пациентов", reply_markup=ReplyKeyboardRemove())
+        await message.answer("Нет новых пациентов", reply_markup=buttons.initial_keyboard_markup)
         return None
 
 async def show_patient_info_bo(message: Message,  state: FSMContext):

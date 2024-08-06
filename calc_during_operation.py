@@ -19,7 +19,7 @@ async def get_patients_do(message: Message,  state: FSMContext):
         await state.set_state(DuringOperationFlow.SHOW_PATIENT)
         return None
     else:
-        await message.answer("Нет пациентов с заполненными предоперационными факторами", reply_markup=ReplyKeyboardRemove())
+        await message.answer("Нет пациентов с заполненными предоперационными факторами", reply_markup=buttons.initial_keyboard_markup)
         return None
 
 async def show_patient_info_do(message: Message,  state: FSMContext):
