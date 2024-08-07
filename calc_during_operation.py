@@ -30,7 +30,7 @@ async def show_patient_info_do(message: Message,  state: FSMContext):
                          f'Номер карты: {patient.card_number}\n'
                          f'Статус: {patient.status}\n'
                          f'Уровень мед.учреждения: {patient.holicestit_organization_level}\n\n'
-                         f'Заполните опросник по пациенту', reply_markup=ReplyKeyboardRemove())
+                         f'Заполните опросник по пациенту', reply_markup=buttons.menu_markup)
     await message.answer(message_texts.adhesion, reply_markup=buttons.yes_no_markup)
     await state.set_state(DuringOperationFlow.STEP_1)
     return None
@@ -92,18 +92,18 @@ async def holecystit_during_operation_4_do(message: Message, state: FSMContext):
                                fibrose_changes=fibrose_changes_answer, infiltrat=infiltrat_answer, total_score=total_score, new_status='closed')
     if patient.holicestit_organization_level == 'Медицинская организация II уровня':
         if total_score>=4:
-            await message.answer(message_texts.hard_second_level_organization_during_operation, reply_markup=ReplyKeyboardRemove(), parse_mode='Markdown')
+            await message.answer(message_texts.hard_second_level_organization_during_operation, reply_markup=buttons.menu_markup, parse_mode='Markdown')
             return None
         else:
-            await message.answer(message_texts.easy_second_level_organization_during_operation, reply_markup=ReplyKeyboardRemove(), parse_mode='Markdown')
+            await message.answer(message_texts.easy_second_level_organization_during_operation, reply_markup=buttons.menu_markup, parse_mode='Markdown')
             return None
 
     if patient.holicestit_organization_level == 'Окружной стационар II уровня':
         if total_score>=4:
-            await message.answer(message_texts.hard_second_level_stacionar_during_operation, reply_markup=ReplyKeyboardRemove(), parse_mode='Markdown')
+            await message.answer(message_texts.hard_second_level_stacionar_during_operation, reply_markup=buttons.menu_markup, parse_mode='Markdown')
             return None
         else:
-            await message.answer(message_texts.easy_second_level_stacionar_during_operation, reply_markup=ReplyKeyboardRemove(), parse_mode='Markdown')
+            await message.answer(message_texts.easy_second_level_stacionar_during_operation, reply_markup=buttons.menu_markup, parse_mode='Markdown')
             return None
 
     if patient.holicestit_organization_level == 'Медицинская организация III уровня':
@@ -112,5 +112,5 @@ async def holecystit_during_operation_4_do(message: Message, state: FSMContext):
             await state.set_state(DuringOperationFlow.SCHEMAS)
             return None
         else:
-            await message.answer(message_texts.easy_third_level_organization_during_operation, reply_markup=ReplyKeyboardRemove(), parse_mode='Markdown')
+            await message.answer(message_texts.easy_third_level_organization_during_operation, reply_markup=buttons.menu_markup, parse_mode='Markdown')
             return None

@@ -24,6 +24,7 @@ async def start():
     dp = Dispatcher()
 
     dp.message.register(conversation.get_start, Command(commands='start'))
+    dp.message.register(conversation.get_start, F.text == 'Главное меню')
 
     # Главное меню
     dp.message.register(conversation.about_us, F.text == '⚕️ О нас')

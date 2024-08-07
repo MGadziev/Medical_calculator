@@ -57,15 +57,15 @@ async def holecystit_before_operation_5(message: Message, state: FSMContext):
     print(total_score)
     if holicestit_organization_level_answer == 'Поликлинический уровень':
         if total_score>= 4:
-            await message.answer(message_texts.hard_lhe_policlinic_level, reply_markup=ReplyKeyboardRemove(), parse_mode='Markdown')
+            await message.answer(message_texts.hard_lhe_policlinic_level, reply_markup=buttons.menu_markup, parse_mode='Markdown')
             return None
         else:
-            await message.answer(message_texts.easy_lhe_policlinic_level, reply_markup=ReplyKeyboardRemove(), parse_mode='Markdown')
+            await message.answer(message_texts.easy_lhe_policlinic_level, reply_markup=buttons.menu_markup, parse_mode='Markdown')
             return None
 
     if holicestit_organization_level_answer == 'Медицинская организация II уровня':
         if total_score>=4:
-            await message.answer(message_texts.hard_second_level_organization, reply_markup=ReplyKeyboardRemove(), parse_mode='Markdown')
+            await message.answer(message_texts.hard_second_level_organization, reply_markup=buttons.menu_markup, parse_mode='Markdown')
             return None
         else:
             await message.answer(message_texts.easy_second_level_organization, reply_markup=ReplyKeyboardRemove(), parse_mode='Markdown')
@@ -76,7 +76,7 @@ async def holecystit_before_operation_5(message: Message, state: FSMContext):
 
     if holicestit_organization_level_answer == 'Окружной стационар II уровня':
         if total_score>=4:
-            await message.answer(message_texts.hard_second_level_stacionar, reply_markup=ReplyKeyboardRemove(), parse_mode='Markdown')
+            await message.answer(message_texts.hard_second_level_stacionar, reply_markup=buttons.menu_markup, parse_mode='Markdown')
             return None
         else:
             await message.answer(message_texts.easy_second_level_stacionar, reply_markup=ReplyKeyboardRemove(), parse_mode='Markdown')

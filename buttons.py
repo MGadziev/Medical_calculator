@@ -49,9 +49,20 @@ yes_no = [
     [
         KeyboardButton(text='Да')
         , KeyboardButton(text='Нет')
-        ]
+        ],
+    [
+        KeyboardButton(text='Главное меню')
+    ]
 ]
 yes_no_markup = ReplyKeyboardMarkup(keyboard=yes_no, resize_keyboard=True)
+
+menu = [
+    [
+        KeyboardButton(text='Главное меню')
+    ]
+]
+menu_markup = ReplyKeyboardMarkup(keyboard=yes_no, resize_keyboard=True)
+
 
 
 holicestit_organization_level_keyboard = [
