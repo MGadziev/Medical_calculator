@@ -29,7 +29,7 @@ async def start():
     # Главное меню
     dp.message.register(conversation.about_us, F.text == '⚕️ О нас')
     dp.message.register(conversation.get_faq, F.text == '❓FAQ')
-    dp.message.register(holecystit.holecystit_start, F.text == '💊 Холецистит')
+    dp.message.register(holecystit.holecystit_start, F.text == '📕 Справочный материал')
     dp.message.register(conversation.get_support, F.text == '🔨 Техническая поддержка')
     dp.message.register(create_patient.create_patient_start, F.text == '👨 Новый пациент')
     dp.message.register(get_patients_.get_patients, F.text == '👨‍👨‍👦 Все пациенты')

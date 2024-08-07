@@ -1,3 +1,4 @@
+import buttons
 from db_act import get_patients_info
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
 from aiogram.types import Message, KeyboardButton, ReplyKeyboardRemove
@@ -35,6 +36,6 @@ async def show_patient_info(message: Message,  state: FSMContext):
                          f'6. Есть ли окутаность желчного пузыря фиксированной прядью большого сальника? {patient.omentum}\n'
                          f'7. Есть ли фиброзные изменения желчного пузыря? {patient.fibrose_changes}\n'
                          f'8. Есть ли у пациента околопузырный инфильтрат? {patient.infiltrat}\n'
-                         f'Комментарий: {patient.comment}\n', reply_markup=ReplyKeyboardRemove())
+                         f'Комментарий: {patient.comment}\n', reply_markup=buttons.menu_markup)
     await state.clear()
     return None

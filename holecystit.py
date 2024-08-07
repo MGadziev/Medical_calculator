@@ -8,7 +8,8 @@ total_score = 0
 # Предоперационные факторы
 async def holecystit_start(message: Message, state: FSMContext):
     await state.clear()
-    await message.answer(message_texts.holicestit_stop_list, parse_mode='Markdown')
+    info_photo = FSInputFile('info_photo.jpg')
+    await message.answer_photo(info_photo, caption=message_texts.holicestit_stop_list, parse_mode='Markdown')
     await message.answer(message_texts.holicestit_organization_level, reply_markup=buttons.holicestit_organization_level_markup)
     await state.set_state(HolecystitOperation.STEP_1)
 

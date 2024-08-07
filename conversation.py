@@ -9,7 +9,7 @@ from buttons import initial_keyboard_markup, faq_buttons, tech_support_buttons
 async def get_start(message: Message, state: FSMContext):
     await state.clear()
     if await check_user(message.from_user.id):
-        fedorov_photo = FSInputFile('fedorov.png')
+        fedorov_photo = FSInputFile('fedorov.jpg')
         await message.answer_photo(fedorov_photo, caption=message_texts.welcome_msg_text, reply_markup=initial_keyboard_markup, parse_mode='Markdown')
     else:
         await message.answer('Введите свое ФИО')

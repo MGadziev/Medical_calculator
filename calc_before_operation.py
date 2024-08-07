@@ -14,6 +14,7 @@ async def get_patients_bo(message: Message,  state: FSMContext):
             builder.add(KeyboardButton(text=f"{str(patient.id)}:"
                                             f"{str(patient.name)}:{str(patient.card_number)}"))
         builder.adjust(2)
+        await message.answer(message_texts.holicestit_stop_list, parse_mode='Markdown')
         await message.answer("Выберите пациента:", reply_markup=builder.as_markup(resize_keyboard=True), )
         await state.set_state(BeforeOperationFlow.SHOW_PATIENT)
         return None

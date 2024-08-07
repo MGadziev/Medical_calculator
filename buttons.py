@@ -6,7 +6,7 @@ class FAQ_Callback(CallbackData, prefix="faq"):
 
 initial_keyboard = [
     [
-        KeyboardButton(text='💊 Холецистит')
+        KeyboardButton(text='📕 Справочный материал')
         , KeyboardButton(text='⚕️ О нас')
         ],
     [
@@ -61,7 +61,7 @@ menu = [
         KeyboardButton(text='Главное меню')
     ]
 ]
-menu_markup = ReplyKeyboardMarkup(keyboard=yes_no, resize_keyboard=True)
+menu_markup = ReplyKeyboardMarkup(keyboard=menu, resize_keyboard=True)
 
 
 
