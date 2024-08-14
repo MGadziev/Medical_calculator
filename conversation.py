@@ -9,8 +9,7 @@ from buttons import initial_keyboard_markup, faq_buttons, tech_support_buttons
 async def get_start(message: Message, state: FSMContext):
     await state.clear()
     if await check_user(message.from_user.id):
-        fedorov_photo = FSInputFile('fedorov.jpg')
-        await message.answer_photo(fedorov_photo, caption=message_texts.welcome_msg_text, reply_markup=initial_keyboard_markup, parse_mode='Markdown')
+        await message.answer('Выберите действие', reply_markup=initial_keyboard_markup)
     else:
         await message.answer('Введите свое ФИО')
         await state.set_state(UserInfo.GET_NAME)
@@ -27,6 +26,9 @@ async def get_clinic(message: Message, state: FSMContext):
     context_data = await state.get_data()
     name = context_data.get('name')
     await create_user(message.from_user.id, message.from_user.username, name, message.text)
+    fedorov_photo = FSInputFile('fedorov.jpg')
+    await message.answer_photo(fedorov_photo, caption=message_texts.welcome_msg_text,
+                               reply_markup=initial_keyboard_markup, parse_mode='Markdown')
     await message.answer('Вы успешно зарегистрированы, выберите действие', reply_markup=initial_keyboard_markup)
     return None
 
