@@ -108,7 +108,7 @@ async def holecystit_during_operation_4_do(message: Message, state: FSMContext):
 
     if patient.holicestit_organization_level == 'Медицинская организация III уровня':
         if total_score>=4:
-            await message.answer(message_texts.hard_third_level_organization_during_operation, reply_markup=ReplyKeyboardRemove(), parse_mode='Markdown')
+            await message.answer(message_texts.hard_third_level_organization_during_operation, reply_markup=buttons.menu_markup, parse_mode='Markdown')
             await state.set_state(DuringOperationFlow.SCHEMAS)
             return None
         else:
