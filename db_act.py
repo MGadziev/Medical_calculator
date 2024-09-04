@@ -111,7 +111,7 @@ async def update_patient_by_id(patient_id, new_status=None, holicestit_organizat
             if new_status:
                 patient.status = new_status
             # Два условия так как если одно условие, то теряем False
-            if holicestit_organization_level is False or holicestit_organization_level is True:
+            if holicestit_organization_level:
                 patient.holicestit_organization_level = holicestit_organization_level
             if age_more_than_55 is False or age_more_than_55 is True:
                 patient.age_more_than_55 = age_more_than_55
