@@ -26,7 +26,7 @@ async def show_patient_info(message: Message,  state: FSMContext):
     patient = await get_patients_info_by_id(chosen_patient_id)
     await message.answer(f'Имя: {patient.name}\n'
                          f'Номер карты: {patient.card_number}\n'
-                         f'Статус: {patient.status}\n'
+                         f'Статус: {status.get(patient.status)}\n'
                          f'Уровень организации: {patient.holicestit_organization_level}\n\n'
                          '1. Возраст пациента старше 55 лет?\n'
                          '2. ИМТ пациента больше 30 кг/м²?\n'
@@ -40,20 +40,26 @@ async def show_patient_info(message: Message,  state: FSMContext):
                          '```Критерии\n'
                          '| № |Статус \n'
                          '|---|------\n'
-                         f'| 1 | {status_dict.get(patient.age_more_than_55)}\n'
-                         f'| 2 | {status_dict.get(patient.imt_more_than_30)}\n'
-                         f'| 3 | {status_dict.get(patient.stoma_operations)} \n'
-                         f'| 4 | {status_dict.get(patient.jaundice)}\n'
-                         f'| 5 | {status_dict.get(patient.adhesion)}\n'
-                         f'| 6 | {status_dict.get(patient.omentum)}\n'
-                         f'| 7 | {status_dict.get(patient.fibrose_changes)}\n'
-                         f'| 8 | {status_dict.get(patient.infiltrat)}```\n'
+                         f'| 1 | {criteria_dict.get(patient.age_more_than_55)}\n'
+                         f'| 2 | {criteria_dict.get(patient.imt_more_than_30)}\n'
+                         f'| 3 | {criteria_dict.get(patient.stoma_operations)} \n'
+                         f'| 4 | {criteria_dict.get(patient.jaundice)}\n'
+                         f'| 5 | {criteria_dict.get(patient.adhesion)}\n'
+                         f'| 6 | {criteria_dict.get(patient.omentum)}\n'
+                         f'| 7 | {criteria_dict.get(patient.fibrose_changes)}\n'
+                         f'| 8 | {criteria_dict.get(patient.infiltrat)}```\n'
                          f'Комментарий: {patient.comment}\n', reply_markup=buttons.menu_markup, parse_mode='Markdown')
     await state.clear()
     return None
 
-status_dict = {
+criteria_dict = {
     True: "Да",
     False: "Нет",
     None: "Критерий не заполнен"
+}
+
+status = {
+    'pending_operation': "Ожидает операции",
+    'new': "Новый",
+    'closed': "Закрыт"
 }
