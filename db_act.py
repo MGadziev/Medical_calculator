@@ -27,6 +27,7 @@ async def create_user(user_id, tg_name, name, clinic):
             session.commit()
             return 0
     except Exception as e:
+        session.rollback()
         print(f"Ошибка при создании нового пользователя: {e}")
 
 async def check_user(user_id):
@@ -38,6 +39,7 @@ async def check_user(user_id):
             return 0
     except Exception as e:
         print(f"Ошибка при создании нового пользователя: {e}")
+        session.rollback()
 
 class Patient(Base):
     __tablename__ = 'patients'
@@ -48,14 +50,14 @@ class Patient(Base):
     status = Column(String, default='new')
     created_at = Column(DateTime)
     holicestit_organization_level = Column(String)
-    age_more_than_55 = Column(Boolean, default=False)
-    imt_more_than_30 = Column(Boolean,  default=False)
-    stoma_operations = Column(Boolean, default=False)
-    jaundice = Column(Boolean, default=False)
-    adhesion = Column(Boolean, default=False)
-    omentum = Column(Boolean, default=False)
-    fibrose_changes = Column(Boolean, default=False)
-    infiltrat = Column(Boolean, default=False)
+    age_more_than_55 = Column(Boolean)
+    imt_more_than_30 = Column(Boolean)
+    stoma_operations = Column(Boolean,)
+    jaundice = Column(Boolean)
+    adhesion = Column(Boolean)
+    omentum = Column(Boolean)
+    fibrose_changes = Column(Boolean)
+    infiltrat = Column(Boolean)
     doctor_id = Column(String)
     total_score = Column(Integer, default=0)
     comment = Column(String)
@@ -69,6 +71,7 @@ async def create_patient(name, card_number, doctor_id):
         return 1
     except Exception as e:
         print(f"Ошибка при создании нового пациента: {e}")
+        session.rollback()
         return None
 
 async def get_patients_info(doctor_id, status=None):
@@ -82,6 +85,7 @@ async def get_patients_info(doctor_id, status=None):
         else:
             return None
     except Exception as e:
+        session.rollback()
         print(f"Ошибка при создании получении информации по пациентам: {e}")
 
 async def get_patients_info_by_id(id):
@@ -92,6 +96,7 @@ async def get_patients_info_by_id(id):
         else:
             return None
     except Exception as e:
+        session.rollback()
         print(f"Ошибка при создании получении информации по пациенту: {e}")
 
 
@@ -99,28 +104,30 @@ async def get_patients_info_by_id(id):
 async def update_patient_by_id(patient_id, new_status=None, holicestit_organization_level=None, age_more_than_55=None
                                , imt_more_than_30=None, stoma_operations=None, jaundice=None, adhesion=None,
                                omentum=None, fibrose_changes=None, infiltrat=None, total_score=None, comment=None):
+
     try:
         patient = session.query(Patient).filter_by(id=patient_id).first()
         if patient:
             if new_status:
                 patient.status = new_status
-            if holicestit_organization_level:
+            # Два условия так как если одно условие, то теряем False
+            if holicestit_organization_level is False or holicestit_organization_level is True:
                 patient.holicestit_organization_level = holicestit_organization_level
-            if age_more_than_55:
+            if age_more_than_55 is False or age_more_than_55 is True:
                 patient.age_more_than_55 = age_more_than_55
-            if imt_more_than_30:
+            if imt_more_than_30 is False or imt_more_than_30 is True:
                 patient.imt_more_than_30 = imt_more_than_30
-            if stoma_operations:
+            if stoma_operations is False or stoma_operations is True:
                 patient.stoma_operations = stoma_operations
-            if jaundice:
+            if jaundice is False or jaundice is True:
                 patient.jaundice = jaundice
-            if adhesion:
+            if adhesion is False or adhesion is True:
                 patient.adhesion = adhesion
-            if omentum:
+            if omentum is False or omentum is True:
                 patient.omentum = omentum
-            if fibrose_changes:
+            if fibrose_changes is False or fibrose_changes is True:
                 patient.fibrose_changes = fibrose_changes
-            if infiltrat:
+            if infiltrat is False or fibrose_changes is True:
                 patient.infiltrat = infiltrat
             if total_score:
                 patient.total_score = total_score
@@ -129,7 +136,7 @@ async def update_patient_by_id(patient_id, new_status=None, holicestit_organizat
             session.commit()
         return None
     except Exception as e:
-        error_message = f"⚠️Ошибка при изменении заявки [sell_usdt]: {str(e)}"
+        error_message = f"⚠️Ошибка при изменении пациента: {str(e)}"
         print(error_message)
         session.rollback()
         return None

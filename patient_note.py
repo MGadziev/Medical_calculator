@@ -27,7 +27,8 @@ async def add_patient_note(message: Message,  state: FSMContext):
     chosen_patient_id = message.text.split(":")[0].strip()
     await state.update_data(chosen_patient_id=chosen_patient_id)
     await state.set_state(PatientNote.SAVE_NOTE)
-    await message.answer("Напишите ваш комментарий", reply_markup=ReplyKeyboardRemove() )
+    await message.answer("Напишите ваш комментарий\n"
+                         "Внимание! Комментарий перезапишет предыдущий коммент по пациенту, если он был", reply_markup=ReplyKeyboardRemove() )
     return None
 
 
